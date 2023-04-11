@@ -52,28 +52,27 @@ public class HillClibing{
         return first.getValue();
     }
 
-    @Override
-    public String toString() {
+    public void print() {
         int maxValue = getMaxValue();
 
         for (int i = maxValue; i > 0; i--) {
-            System.out.print("|");
+            System.out.print("+ ");
             for (int value : values) {
-                if (value == i) {
-                    System.out.print(i+"    ");
+                if (value >= i) {
+                    System.out.print("|  ");
                 } else {
-                    System.out.print("    ");
+                    System.out.print("   ");
                 }
             }
-            System.out.println();
+            System.out.println("+");
         }
-        for (int i = 0; i < values.length; i++) {
-            System.out.print("----");
+        for (int value : values) {
+            if (value + "".length() < 10) System.out.print("  " + value);
+            else System.out.print(" " + value);
         }
         System.out.println();
-
-        return "Global maximum = " + new HillClibing().maxGlobal(first);
     }
+
 
     private static int getMaxValue() {
         int maxValue = values[0];

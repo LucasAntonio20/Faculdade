@@ -12,6 +12,7 @@ public class Program {
 
         HillClibing hillClibing = new HillClibing();
         hillClibing.run();
-        System.out.println(hillClibing);
+        System.out.println("     Search Area");
+        hillClibing.print();
     }
 }
