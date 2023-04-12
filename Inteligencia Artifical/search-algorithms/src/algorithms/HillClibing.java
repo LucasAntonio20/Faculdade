@@ -1,24 +1,33 @@
 package algorithms;
 
+import entities.DoublyLinkedList;
 import entities.Node;
 
+import java.util.Arrays;
+import java.util.Objects;
 import java.util.Random;
 
 public class HillClibing{
 
-    private Node<Integer> first;
+    DoublyLinkedList<Integer> list = new DoublyLinkedList<>();
     private static int[] values;
 
     public HillClibing() {
         generateRandomValues();
+        addOnList();
     }
 
     public HillClibing(int[] values) {
-        this.values = values;
+        HillClibing.values = values;
+        addOnList();
+    }
+
+    public Integer getFirst() {
+        return list.get(0);
     }
 
     private void generateRandomValues() {
-        this.values = new int[15];
+        values = new int[15];
         for (int i = 0; i < values.length; i++) {
             int n = new Random().nextInt((i+2) * 6);
             if (n > 10) n = n / 3;
@@ -26,30 +35,26 @@ public class HillClibing{
         }
     }
 
-    public void run() {
-        this.first= new Node<>(values[0]);
-        Node<Integer> actual = first;
-
-        for (int i = 1; i < values.length; i++) {
-            actual.setNeighbor(new Node<>(values[i]));
-            actual = actual.getNeighbor();
+    private void addOnList(){
+        for (int value : values) {
+            list.add(value);
         }
     }
 
-    public Integer maxGlobal(Node<Integer> first) {
-        Node<Integer> actual = first;
-        Node<Integer> maxGlobal = first;
-        while (actual.getNeighbor() != null) {
-            Node<Integer> neighbor = actual.getNeighbor();
-            if (neighbor.compare(actual) < 0) {
-                return maxGlobal.getValue();
+    public Integer maxGlobal() {
+        Node<Integer> actual = list.getNode(0);
+        Node<Integer> maxGlobal = actual;
+        for (int i = 0; i < list.size(); i++) {
+            if (maxGlobal.getNext() == null) return maxGlobal.getContent();
+            Node<Integer> neighbor = actual.getNext();
+            if (neighbor.getContent() < actual.getContent()) {
+                return maxGlobal.getContent();
             } else {
                 maxGlobal = neighbor;
             }
             actual = neighbor;
         }
-        if (maxGlobal.getNeighbor() == null) return maxGlobal.getValue();
-        return first.getValue();
+        return list.get(0);
     }
 
     public void print() {
@@ -75,6 +80,7 @@ public class HillClibing{
 
 
     private static int getMaxValue() {
+        if (Arrays.equals(values, new int[]{})) return 0;
         int maxValue = values[0];
         for (int i = 1; i < values.length; i++) {
             if (values[i] > maxValue) {

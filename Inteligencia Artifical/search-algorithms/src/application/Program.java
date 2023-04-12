@@ -10,9 +10,10 @@ public class Program {
 
         // Hill Climb
 
-        HillClibing hillClibing = new HillClibing();
-        hillClibing.run();
+        int[] values = new int[]{2, 5, 7, 20, 6};
+        HillClibing hillClibing = new HillClibing(values);
         System.out.println("     Search Area");
         hillClibing.print();
+
     }
 }

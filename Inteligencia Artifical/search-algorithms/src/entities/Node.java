@@ -1,42 +1,41 @@
 package entities;
 
-public class Node<Interger>{
+public class Node<Type> {
 
-    Interger value;
-    private Node<Interger> neighbor;
+    private Node<Type> previous;
+    private Node<Type> next;
+    private Type content;
 
-    public Node(Interger value) {
-        this.value = value;
-        this.neighbor = null;
+    public Node(Type content) {
+        this.content = content;
     }
 
-    public Node(Interger value, Interger neighbor) {
-        this.value = value;
-        this.neighbor = new Node<>(neighbor);
+    public Node<Type> getPrevious() {
+        return previous;
     }
 
-    public Interger getValue() {
-        return value;
+    public void setPrevious(Node<Type> previous) {
+        this.previous = previous;
     }
 
-    public void setValue(Interger value) {
-        this.value = value;
+    public Node<Type> getNext() {
+        return next;
     }
 
-    public Node<Interger> getNeighbor() {
-        return neighbor;
+    public void setNext(Node<Type> next) {
+        this.next = next;
     }
 
-    public void setNeighbor(Node<Interger> neighbor) {
-        this.neighbor = neighbor;
+    public Type getContent() {
+        return content;
     }
 
-    public int compare(Node<Interger> other) {
-        return Integer.compare((Integer) this.value, (Integer)  other.getValue());
+    public void setContent(Type content) {
+        this.content = content;
     }
 
     @Override
     public String toString() {
-        return String.valueOf(value);
+        return "["+ content + ']';
     }
 }
