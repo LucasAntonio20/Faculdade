@@ -51,7 +51,7 @@ public class HillClimbing {
             if (next.getContent() < actual.getContent() && previous.getContent() < actual.getContent()) {
                 return maxGlobal.getContent();
             }
-            if (next.getContent() > actual.getContent() ) {
+            if (next.getContent() >= actual.getContent() ) {
                 maxGlobal = next;
                 actual = next;
             } else {
