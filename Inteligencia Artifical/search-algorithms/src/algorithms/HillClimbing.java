@@ -4,26 +4,21 @@ import entities.DoublyLinkedList;
 import entities.Node;
 
 import java.util.Arrays;
-import java.util.Objects;
 import java.util.Random;
 
-public class HillClibing{
+public class HillClimbing {
 
     DoublyLinkedList<Integer> list = new DoublyLinkedList<>();
     private static int[] values;
 
-    public HillClibing() {
+    public HillClimbing() {
         generateRandomValues();
         addOnList();
     }
 
-    public HillClibing(int[] values) {
-        HillClibing.values = values;
+    public HillClimbing(int[] values) {
+        HillClimbing.values = values;
         addOnList();
-    }
-
-    public Integer getFirst() {
-        return list.get(0);
     }
 
     private void generateRandomValues() {
@@ -42,17 +37,27 @@ public class HillClibing{
     }
 
     public Integer maxGlobal() {
-        Node<Integer> actual = list.getNode(0);
+        return maxGlobal(0);
+    }
+
+    public Integer maxGlobal(int start) {
+        Node<Integer> actual = list.getNode(start);
         Node<Integer> maxGlobal = actual;
         for (int i = 0; i < list.size(); i++) {
-            if (maxGlobal.getNext() == null) return maxGlobal.getContent();
-            Node<Integer> neighbor = actual.getNext();
-            if (neighbor.getContent() < actual.getContent()) {
+            Node<Integer> next = actual.getNext();
+            Node<Integer> previous = actual.getPrevious();
+            if (previous == null) previous = new Node<>(-20);
+            if (next == null) next = new Node<>(-20);
+            if (next.getContent() < actual.getContent() && previous.getContent() < actual.getContent()) {
                 return maxGlobal.getContent();
-            } else {
-                maxGlobal = neighbor;
             }
-            actual = neighbor;
+            if (next.getContent() > actual.getContent() ) {
+                maxGlobal = next;
+                actual = next;
+            } else {
+                maxGlobal = previous;
+                actual = previous;
+            }
         }
         return list.get(0);
     }

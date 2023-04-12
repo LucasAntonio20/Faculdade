@@ -1,19 +1,17 @@
 package application;
 
-import algorithms.HillClibing;
-import entities.Node;
-
-import java.util.Random;
+import algorithms.HillClimbing;
 
 public class Program {
     public static void main(String[] args) {
 
         // Hill Climb
 
-        int[] values = new int[]{2, 5, 7, 20, 6};
-        HillClibing hillClibing = new HillClibing(values);
+        //int[] values = new int[]{2, 5, 27, 22, 20, 32, 18, 20, 6};
+        HillClimbing hillClimbing = new HillClimbing();
         System.out.println("     Search Area");
-        hillClibing.print();
+        hillClimbing.print();
+        System.out.println(hillClimbing.maxGlobal());
 
     }
 }
